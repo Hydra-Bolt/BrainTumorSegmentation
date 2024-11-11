@@ -14,9 +14,6 @@ def process_path(image_path, mask_path):
     img = tf.image.convert_image_dtype(img, tf.float32)
 
     mask = tiff.imread(mask_path)
-    # Check if mask is 2D or 3D
-    if mask.ndim == 2:
-        mask = np.expand_dims(mask, axis=-1)
     mask = tf.image.convert_image_dtype(mask, tf.float32)
     mask = tf.math.reduce_max(mask, axis=-1, keepdims=True)
     return img, mask
